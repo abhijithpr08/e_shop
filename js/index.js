@@ -17,7 +17,7 @@ async function fetchProducts() {
 
       str += `
   <div class="card">
-      <a href="/pages/product.html?id=${product.id}">
+      <a href="./pages/product.html?id=${product.id}">
           <img src="${product.thumbnail}" alt="">
           <h3>${product.title}</h3>
           <p>Rating: ⭐ ${product.rating}</p>
