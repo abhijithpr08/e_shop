@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>E-Shop</title>
   <link rel="stylesheet" href="./css/index.css" />
-  <link
+  <link  
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   />
@@ -13,6 +13,7 @@
 
 <body>
   <div class="main">
+    <!-- 🔵 Navbar -->
     <nav class="navbar">
       <div class="logo">
         <span class="logo-text">E-SHOP</span>
@@ -20,24 +21,25 @@
       </div>
 
       <div class="search-bar">
-        <input type="text" id="search" placeholder="Search for products, brands and more" />
-        <button><span class="material-symbols-outlined">search</span></button>
+        <input type="text" id="search-input" placeholder="Search for products..." autocomplete="off" />
+        <button id="search-btn"><span class="material-symbols-outlined">search</span></button>
+        <div class="suggestion-box" id="suggestion-box"></div>
       </div>
 
-      <!-- NAV LINKS -->
-      <div class="nav-right">
+      <div class="nav-right" id="nav-right">
         <a href="#"><span class="material-symbols-outlined">account_circle</span> Login</a>
         <a href="./pages/cart.html"><span class="material-symbols-outlined">shopping_cart</span> Cart</a>
         <a href="#"><span class="material-symbols-outlined">favorite</span></a>
       </div>
 
-      <!-- MENU ICON -->
       <div class="menu-icon" id="menu-toggle">
         <span class="material-symbols-outlined">menu</span>
       </div>
     </nav>
+    <div id="categories" class="sidebar"></div>
 
-    <!-- PRODUCT GRID -->
+
+    <!-- 🟢 Product grid -->
     <div class="cards" id="cards"></div>
   </div>
 
