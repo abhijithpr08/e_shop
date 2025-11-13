@@ -9,7 +9,7 @@ function loadCart() {
         container.innerHTML = `<div class="empty-cart">
           <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" alt="Empty Cart" />
           <h3>Your cart is empty!</h3>
-          <a href="/index.html">Shop Now</a>
+          <a href="../index.html">Shop Now</a>
         </div>`;
         itemCount.textContent = "0";
         priceAmount.textContent = "₹0";

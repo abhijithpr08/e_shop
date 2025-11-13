@@ -122,10 +122,10 @@ async function fetchProductDetails() {
           quantity: 1,
         });
         localStorage.setItem("cart", JSON.stringify(cart));
-        addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> GO TO CART`;
+        addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span><p>GO TO CART</p>`;
         addToCartBtn.style.background = "#2874f0";
       } else {
-        window.location.href = "./pages/cart.html";
+        window.location.href = "../pages/cart.html";
       }
     });
   } catch (err) {
