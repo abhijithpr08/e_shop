@@ -9,7 +9,7 @@ async function fetchProductDetails() {
     let thumbnails = "";
     data.images.forEach((img) => {
       thumbnails += `<img src="${img}" alt="${data.title}" class="thumb" />`;
-    })
+    });
 
     let reviewsHTML = "";
     if (data.reviews && data.reviews.length > 0) {
@@ -29,12 +29,17 @@ async function fetchProductDetails() {
 
     const originalPriceINR = data.price * 85;
     const discount = data.discountPercentage || 0;
-    const discountedPrice = originalPriceINR - (originalPriceINR * discount) / 100;
+    const discountedPrice =
+      originalPriceINR - (originalPriceINR * discount) / 100;
 
     const returnPolicy = data.returnPolicy || "7-day replacement policy";
-    const warrantyInformation = data.warrantyInformation || "1-year manufacturer warranty";
-    const shippingInformation = data.shippingInformation || "Free delivery within 5-7 business days";
-    const availabilityStatus = data.availabilityStatus || (data.stock > 0 ? "In Stock" : "Out of Stock");
+    const warrantyInformation =
+      data.warrantyInformation || "1-year manufacturer warranty";
+    const shippingInformation =
+      data.shippingInformation ||
+      "Free delivery within 5-7 business days";
+    const availabilityStatus =
+      data.availabilityStatus || (data.stock > 0 ? "In Stock" : "Out of Stock");
 
     document.getElementById("productDetails").innerHTML = `
       <div class="product-page">
@@ -46,7 +51,7 @@ async function fetchProductDetails() {
             </div>
           </div>
           <div class="buttons">
-            <button class="add">🛒 ADD TO CART</button>
+            <button id="addToCart" class="add">🛒 ADD TO CART</button>
             <button class="buy">BUY NOW</button>
           </div>
         </div>
@@ -78,11 +83,45 @@ async function fetchProductDetails() {
       </div>
     `;
 
+    // Image hover switch
     const mainImg = document.getElementById("mainImg");
     document.querySelectorAll(".thumb").forEach((img) => {
       img.addEventListener("mouseenter", () => {
         mainImg.src = img.src;
       });
+    });
+
+    // ADD TO CART functionality
+    const addToCartBtn = document.getElementById("addToCart");
+
+    // Check if this item already exists in cart
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const isInCart = cart.some((item) => item.id === data.id);
+
+    if (isInCart) {
+      addToCartBtn.textContent = "🛍️ GO TO CART";
+      addToCartBtn.style.background = "#2874f0";
+    }
+
+    addToCartBtn.addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const exists = cart.find((item) => item.id === data.id);
+      if (!exists) {
+        cart.push({
+          id: data.id,
+          title: data.title,
+          price: discountedPrice,
+          thumbnail: data.thumbnail,
+          quantity: 1,
+        });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        addToCartBtn.textContent = "🛍️ GO TO CART";
+        addToCartBtn.style.background = "#2874f0";
+      } else {
+        // Redirect to cart page
+        window.location.href = "/pages/cart.html";
+      }
     });
 
   } catch (err) {

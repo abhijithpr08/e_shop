@@ -1,42 +1,46 @@
-const menuToggle = document.getElementById('menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
+document.addEventListener("DOMContentLoaded", () => {
 
-async function fetchProducts() {
-  try {
-    const res = await fetch("https://dummyjson.com/products");
-    const data = await res.json();
+  // --- Product fetching ---
+  async function fetchProducts() {
+    const cardsElem = document.getElementById("cards");
+    if (!cardsElem) return console.error("No #cards found.");
 
-    let str = ``
-    data.products.forEach(product => {
-      const originalPriceINR = product.price * 85;
-      const discount = product.discountPercentage || 0;
-      const discountedPrice = originalPriceINR - (originalPriceINR * discount) / 100;
+    try {
+      const res = await fetch("https://dummyjson.com/products");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
 
-      str += `
-  <div class="card">
-      <a href="./pages/product.html?id=${product.id}">
-          <img src="${product.thumbnail}" alt="">
-          <h3>${product.title}</h3>
-          <p>Rating: ⭐ ${product.rating}</p>
-          <div class="price-box">
-              <span class="final-price">₹${discountedPrice.toLocaleString("en-IN")}</span>
-              <span class="original-price">₹${originalPriceINR.toLocaleString("en-IN")}</span>
-              <span class="discount">${discount}% off</span>
-          </div>
-      </a>
-  </div>
-`;
+      let str = "";
+      data.products.forEach((product) => {
+        const originalPriceINR = product.price * 85;
+        const discount = product.discountPercentage || 0;
+        const discountedPrice = Math.round(originalPriceINR - (originalPriceINR * discount) / 100);
 
+        const safeTitle = (product.title || "").replaceAll('"', "&quot;");
 
-    });
-    document.getElementById("cards").innerHTML = str;
+        str += `
+          <div class="card">
+            <a href="./pages/product.html?id=${product.id}">
+              <div class="img">
+                <img src="${product.thumbnail}" alt="${safeTitle}">
+              </div>
+              <h3>${product.title}</h3>
+              <p>Rating: ⭐ ${product.rating}</p>
+              <div class="price-box">
+                <span class="final-price">₹${discountedPrice.toLocaleString("en-IN")}</span>
+                <span class="original-price">₹${originalPriceINR.toLocaleString("en-IN")}</span>
+                <span class="discount">${discount}% off</span>
+              </div>
+            </a>
+          </div>`;
+      });
 
-  } catch (error) {
-    console.error("Error fetching products:", error);
+      cardsElem.innerHTML = str;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      cardsElem.innerHTML = `<p style="padding:20px;">Failed to load products. Try again later.</p>`;
+    }
   }
-}
 
-fetchProducts();
+  fetchProducts();
+});

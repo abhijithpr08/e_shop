@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart | Flipkart Style</title>
+    <link rel="stylesheet" href="../css/cart.css" />
+
+</head>
+<body>
+  <header class="header">
+    <div class="logo">🛍️ MyCart</div>
+    <a href="/index.html" class="continue">Continue Shopping</a>
+  </header>
+
+  <main class="cart-page">
+    <div class="cart-items" id="cartContainer">
+      <!-- Items load here -->
+    </div>
+
+    <aside class="price-details">
+      <h2>PRICE DETAILS</h2>
+      <div class="price-row">
+        <span>Price (<span id="itemCount">0</span> items)</span>
+        <span id="priceAmount">₹0</span>
+      </div>
+      <div class="price-row">
+        <span>Discount</span>
+        <span class="green">− ₹0</span>
+      </div>
+      <div class="price-row total">
+        <strong>Total Amount</strong>
+        <strong id="totalAmount">₹0</strong>
+      </div>
+      <button id="placeOrder" class="order-btn">PLACE ORDER</button>
+    </aside>
+  </main>
+
+
+  <script src="../js/cart.js"></script>
+
+</body>
+</html>
