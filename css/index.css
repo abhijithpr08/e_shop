@@ -196,6 +196,22 @@ body {
   color: inherit;
 }
 
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #388e3c; /* Flipkart green */
+  font-weight: 600;
+  font-size: 14px;
+  gap: 4px;
+}
+
+.star-icon {
+  color: #ffb400; /* gold star color */
+  font-size: 18px;
+  vertical-align: middle;
+}
+
 /* PRICE BOX */
 .price-box {
   display: flex;

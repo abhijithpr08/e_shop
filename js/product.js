@@ -16,7 +16,9 @@ async function fetchProductDetails() {
       data.reviews.forEach((r) => {
         reviewsHTML += `
           <div class="review">
-            <p><strong>${r.reviewerName}</strong> ⭐ ${r.rating}</p>
+            <p><strong>${r.reviewerName}</strong>
+              <span class="material-symbols-outlined star-icon">star</span> ${r.rating}
+            </p>
             <p>${r.comment}</p>
             <small><b>Email:</b> ${r.reviewerEmail}</small><br>
             <small><b>Date:</b> ${new Date(r.date).toLocaleDateString()}</small>
@@ -24,7 +26,7 @@ async function fetchProductDetails() {
         `;
       });
     } else {
-      reviewsHTML = `<p>No reviews yet 😔</p>`;
+      reviewsHTML = `<p>No reviews yet <span class="material-symbols-outlined sad-icon">mood_bad</span></p>`;
     }
 
     const originalPriceINR = data.price * 85;
@@ -36,8 +38,7 @@ async function fetchProductDetails() {
     const warrantyInformation =
       data.warrantyInformation || "1-year manufacturer warranty";
     const shippingInformation =
-      data.shippingInformation ||
-      "Free delivery within 5-7 business days";
+      data.shippingInformation || "Free delivery within 5-7 business days";
     const availabilityStatus =
       data.availabilityStatus || (data.stock > 0 ? "In Stock" : "Out of Stock");
 
@@ -51,8 +52,12 @@ async function fetchProductDetails() {
             </div>
           </div>
           <div class="buttons">
-            <button id="addToCart" class="add">🛒 ADD TO CART</button>
-            <button class="buy">BUY NOW</button>
+            <button id="addToCart" class="add">
+              <span class="material-symbols-outlined">shopping_cart</span> <p>ADD TO CART</p>
+            </button>
+            <button class="buy">
+              <span class="material-symbols-outlined">bolt</span> <p>BUY NOW</p>
+            </button>
           </div>
         </div>
 
@@ -70,7 +75,10 @@ async function fetchProductDetails() {
           <p><strong>Category:</strong> ${data.category}</p>
           <p><strong>Availability:</strong> ${availabilityStatus}</p>
           <p><strong>Stock:</strong> ${data.stock}</p>
-          <p><strong>Rating:</strong> ⭐ ${data.rating}</p>
+          <p class="rating-line">
+            <strong>Rating:</strong> 
+            <span class="material-symbols-outlined star-icon">star</span> ${data.rating}
+          </p>
           <p><strong>Return Policy:</strong> ${returnPolicy}</p>
           <p><strong>Warranty:</strong> ${warrantyInformation}</p>
           <p><strong>Shipping Info:</strong> ${shippingInformation}</p>
@@ -83,7 +91,7 @@ async function fetchProductDetails() {
       </div>
     `;
 
-    // Image hover switch
+    // --- Thumbnail Hover Preview ---
     const mainImg = document.getElementById("mainImg");
     document.querySelectorAll(".thumb").forEach((img) => {
       img.addEventListener("mouseenter", () => {
@@ -91,22 +99,20 @@ async function fetchProductDetails() {
       });
     });
 
-    // ADD TO CART functionality
+    // --- ADD TO CART functionality ---
     const addToCartBtn = document.getElementById("addToCart");
-
-    // Check if this item already exists in cart
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const isInCart = cart.some((item) => item.id === data.id);
 
     if (isInCart) {
-      addToCartBtn.textContent = "🛍️ GO TO CART";
+      addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> <p>GO TO CART</p>`;
       addToCartBtn.style.background = "#2874f0";
     }
 
     addToCartBtn.addEventListener("click", () => {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
       const exists = cart.find((item) => item.id === data.id);
+
       if (!exists) {
         cart.push({
           id: data.id,
@@ -116,14 +122,12 @@ async function fetchProductDetails() {
           quantity: 1,
         });
         localStorage.setItem("cart", JSON.stringify(cart));
-        addToCartBtn.textContent = "🛍️ GO TO CART";
+        addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> GO TO CART`;
         addToCartBtn.style.background = "#2874f0";
       } else {
-        // Redirect to cart page
-        window.location.href = "/pages/cart.html";
+        window.location.href = "./pages/cart.html";
       }
     });
-
   } catch (err) {
     console.error("Error fetching product:", err);
   }

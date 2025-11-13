@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   // --- Product fetching ---
   async function fetchProducts() {
     const cardsElem = document.getElementById("cards");
@@ -14,9 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
       data.products.forEach((product) => {
         const originalPriceINR = product.price * 85;
         const discount = product.discountPercentage || 0;
-        const discountedPrice = Math.round(originalPriceINR - (originalPriceINR * discount) / 100);
+        const discountedPrice = Math.round(
+          originalPriceINR - (originalPriceINR * discount) / 100
+        );
 
         const safeTitle = (product.title || "").replaceAll('"', "&quot;");
+        const rating = product.rating.toFixed(1);
 
         str += `
           <div class="card">
@@ -25,7 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img src="${product.thumbnail}" alt="${safeTitle}">
               </div>
               <h3>${product.title}</h3>
-              <p>Rating: ⭐ ${product.rating}</p>
+              <p class="rating">
+                <span class="material-symbols-outlined star-icon">star</span>
+                ${rating}
+              </p>
               <div class="price-box">
                 <span class="final-price">₹${discountedPrice.toLocaleString("en-IN")}</span>
                 <span class="original-price">₹${originalPriceINR.toLocaleString("en-IN")}</span>

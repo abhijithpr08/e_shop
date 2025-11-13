@@ -115,6 +115,23 @@ body {
   color: #555;
 }
 
+.star-icon {
+  color: #ffb400; /* Gold */
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.sad-icon {
+  color: #999;
+  vertical-align: middle;
+}
+
+.rating-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 /* PRICE BOX */
 .price-box {
   display: flex;
@@ -160,10 +177,25 @@ body {
 }
 
 /* BUTTONS */
-.buttons {
+.buttons  {
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 18px;
+  border-radius: 4px;
+}
+
+.buttons button {
+  display: flex;
+  gap: 2px;
+}
+
+.buttons p{
+  padding-top: 4px;
 }
 
 .add,
@@ -178,13 +210,13 @@ body {
 }
 
 .add {
-  background: #ff9f00; /* Flipkart orange-yellow */
-  color: #fff;
+  background-color: #ff9f00;
+  color: white;
 }
 
 .buy {
-  background: #fb641b; /* Flipkart orange-red */
-  color: #fff;
+  background-color: #fb641b;
+  color: white;
 }
 
 .add:hover {
