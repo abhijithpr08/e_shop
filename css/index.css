@@ -180,13 +180,11 @@ body {
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* Hover animation on icons */
 .nav-right a:hover .material-symbols-outlined {
   transform: scale(1.1);
   color: #ffe500;
 }
 
-/* MOBILE MENU ICON */
 .menu-icon {
   display: none;
   font-size: 28px;
@@ -220,8 +218,6 @@ body {
 
 .category-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .category-item {
@@ -240,7 +236,6 @@ body {
   font-weight: 500;
 }
 
-/* Active Category */
 .category-item.active {
   background-color: #2874f0;
   color: #fff;
@@ -298,17 +293,6 @@ body {
   font-weight: 500;
 }
 
-.card p {
-  text-align: center;
-  font-size: 14px;
-  color: #757575;
-}
-
-.card a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .rating {
   display: flex;
   align-items: center;
@@ -322,7 +306,6 @@ body {
 .star-icon {
   color: #ffb400;
   font-size: 18px;
-  vertical-align: middle;
 }
 
 /* PRICE BOX */
@@ -342,7 +325,7 @@ body {
 
 .original-price {
   text-decoration: line-through;
-  color: #9e9e9e;
+  color: #9e9e3e;
   font-size: 14px;
 }
 
@@ -359,58 +342,9 @@ body {
   }
 }
 
-@media (max-width: 900px) {
-  .navbar {
-    gap: 10px;
-    padding: 0 10px;
-  }
+/* ❌ CATEGORY SIDEBAR NO CHANGE HERE — removed the incorrect section */
 
-  .search-bar {
-    max-width: 350px;
-    height: 36px;
-  }
-
-  .nav-right {
-    gap: 10px;
-  }
-
-  .nav-right a {
-    font-size: 13px;
-  }
-
-  /* Sidebar becomes top bar */
-  .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    box-shadow: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .sidebar h3 {
-    width: 100%;
-    text-align: center;
-  }
-
-  .category-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    margin: 5px;
-    border-radius: 5px;
-    flex: 0 0 calc(33.33% - 10px);
-    text-align: center;
-  }
-
-  .cards {
-    margin-left: 0;
-    width: 100%;
-  }
-}
-
-/* Below 664px — Hide Right Icons & Show Menu */
+/* ---------------- BELOW 664px ---------------- */
 @media (max-width: 664px) {
   .nav-right {
     display: none;
@@ -430,56 +364,23 @@ body {
 
   .menu-icon {
     display: block;
-    font-size: 28px;
-    color: white;
-    cursor: pointer;
-  }
-
-  .nav-right a {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .nav-right a:last-child {
-    border-bottom: none;
-  }
-
-  .navbar {
-    gap: 10px;
-    padding: 0 10px;
   }
 
   .search-bar {
-    flex: 1;
     max-width: 250px;
     height: 35px;
   }
 
-  .search-bar input {
-    padding: 6px 8px;
-    font-size: 13px;
-  }
-
-  .logo-text {
-    font-size: 1.3rem;
-  }
-
-  .logo span {
-    font-size: 0.8rem;
-  }
-
-  .category-item {
-    flex: 0 0 calc(50% - 10px);
+  .cards {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    width: 100%;
+    padding: 100px 20px;
   }
 }
 
 @media (max-width: 600px) {
   .cards {
     grid-template-columns: 1fr;
-    padding: 100px 20px;
-  }
-
-  .category-item {
-    flex: 0 0 calc(50% - 10px);
   }
 }
