@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const navRight = document.getElementById("nav-right");
   const categoriesElem = document.getElementById("categories");
 
-  // ✅ Fetch and Display All Categories
   async function fetchCategories() {
     try {
       const res = await fetch("https://dummyjson.com/products/categories");
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchCategories();
 
-  // ✅ Display Categories
   function displayCategories(categories) {
     let html = `<h3>Categories</h3><ul class="category-list">`;
     categories.forEach((cat) => {
@@ -34,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     html += `</ul>`;
     categoriesElem.innerHTML = html;
 
-    // ✅ Add click event to filter products by category
     document.querySelectorAll(".category-item").forEach((item) => {
       item.addEventListener("click", async (e) => {
         const category = e.target.dataset.category;
@@ -45,12 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ Menu Toggle for Mobile
   menuToggle.addEventListener("click", () => {
     navRight.classList.toggle("open");
   });
 
-  // ✅ Fetch Products and Store in LocalStorage
   async function fetchProducts() {
     try {
       let data = JSON.parse(localStorage.getItem("productsData"));
@@ -67,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ✅ Display Products on the Page
   function displayProducts(products) {
     let str = "";
     products.forEach((product) => {
@@ -99,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cardsElem.innerHTML = str;
   }
 
-  // ✅ Search Suggestions
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase().trim();
     const storedData = JSON.parse(localStorage.getItem("productsData"));
@@ -135,14 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
     suggestionBox.style.display = "block";
   });
 
-  // ✅ Hide suggestion box when clicking outside
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".search-bar")) {
       suggestionBox.style.display = "none";
     }
   });
-
-  // ✅ Manual Search Button
   searchBtn.addEventListener("click", () => {
     const query = searchInput.value.toLowerCase().trim();
     const storedData = JSON.parse(localStorage.getItem("productsData"));

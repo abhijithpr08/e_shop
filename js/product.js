@@ -91,7 +91,6 @@ async function fetchProductDetails() {
       </div>
     `;
 
-    // --- Thumbnail Hover Preview ---
     const mainImg = document.getElementById("mainImg");
     document.querySelectorAll(".thumb").forEach((img) => {
       img.addEventListener("mouseenter", () => {
@@ -99,7 +98,6 @@ async function fetchProductDetails() {
       });
     });
 
-    // --- ADD TO CART functionality ---
     const addToCartBtn = document.getElementById("addToCart");
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const isInCart = cart.some((item) => item.id === data.id);
